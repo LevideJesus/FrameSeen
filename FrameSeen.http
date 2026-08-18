@@ -1,6 +1,29 @@
 @FrameSeen_HostAddress = http://localhost:5066
 
-GET {{FrameSeen_HostAddress}}/weatherforecast/
+GET {{FrameSeen_HostAddress}}/api/series/
 Accept: application/json
 
-###
+### GET SERIE BY ID 
+GET {{FrameSeen_HostAddress}}/api/series/1
+Accept: application/json
+
+### UPDATE A SERIE
+PUT {{FrameSeen_HostAddress}}/api/series/1
+Accept: application/json
+Content-Type: application/json
+{
+    "id": 1,
+  "name": "Stranger Things",
+  "overview": "A group of young boys getting in trouble and having to fight against monsters",
+  "posterPath": null,
+  "numberOfSeasons": 5,
+  "numberOfEpisodes": 300,
+  "episodeRunTime": null,
+  "status": "Ended",
+  "firstAirDate": null
+}
+
+### DELETE A SERIE
+DELETE {{FrameSeen_HostAddress}}/api/series/1
+Accept: application/json
+

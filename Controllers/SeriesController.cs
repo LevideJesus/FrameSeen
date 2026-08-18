@@ -45,6 +45,46 @@ namespace FrameSeen.Controllers
             return Ok(response);
         }
 
-        
+        [HttpPut]
+        [Route("{id}")]
+
+        public IActionResult UpdateProduct(Series serie)
+        {
+            var existingSerie = series.FirstOrDefault( s => s.Id == serie.Id);
+
+            if(existingSerie == null)
+            {
+                return NotFound();
+
+            }
+
+            existingSerie.Name = serie.Name;
+            existingSerie.Overview = serie.Overview;
+            existingSerie.PosterPath = serie.PosterPath;
+            existingSerie.NumberOfSeasons = serie.NumberOfSeasons;
+            existingSerie.NumberOfEpisodes = serie.NumberOfEpisodes;
+            existingSerie.EpisodeRunTime = serie.EpisodeRunTime;
+            existingSerie.Status = serie.Status;
+            existingSerie.FirstAirDate = serie.FirstAirDate;
+
+            return NoContent();
+
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+
+        public IActionResult DeleteSerie(int id)
+        {
+            var serieToDelete = series.FirstOrDefault( s => s.Id == id);
+
+            if(serieToDelete == null)
+            {
+                return NotFound();
+            }
+            series.Remove(serieToDelete);
+
+            return NoContent();
+        }
     }    
 }
