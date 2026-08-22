@@ -1,18 +1,17 @@
 @FrameSeen_HostAddress = http://localhost:5066
 
-GET {{FrameSeen_HostAddress}}/api/series/
-Accept: application/json
-
 ### GET SERIE BY ID 
 GET {{FrameSeen_HostAddress}}/api/series/1
 Accept: application/json
 
-### UPDATE A SERIE
-PUT {{FrameSeen_HostAddress}}/api/series/1
+### ADD A SERIE
+
+POST {{FrameSeen_HostAddress}}/api/series/
 Accept: application/json
 Content-Type: application/json
+
 {
-    "id": 1,
+  
   "name": "Stranger Things",
   "overview": "A group of young boys getting in trouble and having to fight against monsters",
   "posterPath": null,
@@ -23,7 +22,41 @@ Content-Type: application/json
   "firstAirDate": null
 }
 
+### UPDATE A SERIE
+POST {{FrameSeen_HostAddress}}/api/series/
+Accept: application/json
+Content-Type: application/json
+
+{
+    
+  "name": "Game of Throwns",
+  "overview": "Kingdows that fight to have the thrown",
+  "posterPath": null,
+  "numberOfSeasons": 7,
+  "numberOfEpisodes": 600,
+  "episodeRunTime": null,
+  "status": "Ended",
+  "firstAirDate": null
+}
+### ADD
+POST {{FrameSeen_HostAddress}}/api/series/
+Accept: application/json
+Content-Type: application/json
+
+{
+    
+  
+  "name": "Dexter",
+  "overview": "A man that is a killer but work for the police",
+  "posterPath": null,
+  "numberOfSeasons": 5,
+  "numberOfEpisodes": 500,
+  "episodeRunTime": null,
+  "status": "Ended",
+  "firstAirDate": null
+}
+
 ### DELETE A SERIE
-DELETE {{FrameSeen_HostAddress}}/api/series/1
+DELETE {{FrameSeen_HostAddress}}/api/series/2
 Accept: application/json
 

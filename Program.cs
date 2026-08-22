@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using FrameSeen.Data;
+using FrameSeen.Services;
 
 namespace FrameSeen
 {
@@ -21,8 +22,10 @@ namespace FrameSeen
                 options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
             );
 
-            var app = builder.Build();
+            builder.Services.AddScoped<ISerieService, SeriesService>();
 
+            var app = builder.Build();
+ 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

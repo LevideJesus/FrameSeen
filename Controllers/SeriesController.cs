@@ -1,4 +1,6 @@
+using FrameSeen.Dtos;
 using FrameSeen.Models;
+using FrameSeen.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrameSeen.Controllers
@@ -8,34 +10,25 @@ namespace FrameSeen.Controllers
 
     public class SeriesController : ControllerBase
     {
-        static List<Series> series = new List<Series>
-        {
-            new Series {Id = 1, 
-                Name = "Vikings", 
-                Overview = "The show follows the legendary Norse hero Ragnar Lothbrok.", 
-                PosterPath = "https://image.tmdb.org/t/p/original/oktTNFM8PzdseiK1X0E0XhB6LvP.jpg", 
-                NumberOfSeasons = 9, 
-                NumberOfEpisodes = 200, 
-                EpisodeRunTime =  22, 
-                Status = "Ended", 
-                FirstAirDate = new DateTime(2016, 7, 15)}
-            };
-    
-        
-        [HttpGet]
 
-        
-        public IActionResult GetSeries()
+        private readonly ISerieService service;
+        public SeriesController(ISerieService serieService)
         {
-
-            return Ok(series);
+            service = serieService;
         }
 
         [HttpGet]
-        [Route("{id}")]
+        public IActionResult GetSeries()
+        {
+
+            return Ok(service.GetAllSeries());
+        }
+
+        [HttpGet ("{id}")]
+  
         public IActionResult GetSeriesById(int id)
         {
-            var response = series.FirstOrDefault(s => s.Id == id);
+            var response = service.GetSeriesById(id);
 
             if(response == null)
             {
@@ -45,46 +38,47 @@ namespace FrameSeen.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPost]
 
-        public IActionResult UpdateProduct(Series serie)
+        public IActionResult CreateSerie(SerieRequest serie)
         {
-            var existingSerie = series.FirstOrDefault( s => s.Id == serie.Id);
+            var createdSerie = service.AddSeries(serie);
+            return CreatedAtAction(nameof(GetSeriesById), new {id = createdSerie.Id}, createdSerie);
+        }
 
-            if(existingSerie == null)
+
+        [HttpPut("{id}")]
+        
+
+        public IActionResult UpdateProduct(int id, Series serie)
+        {
+            try
+            {
+                service.UpdateSeries(id, serie);
+
+                return NoContent();
+            }
+            catch (Exception)
             {
                 return NotFound();
-
             }
-
-            existingSerie.Name = serie.Name;
-            existingSerie.Overview = serie.Overview;
-            existingSerie.PosterPath = serie.PosterPath;
-            existingSerie.NumberOfSeasons = serie.NumberOfSeasons;
-            existingSerie.NumberOfEpisodes = serie.NumberOfEpisodes;
-            existingSerie.EpisodeRunTime = serie.EpisodeRunTime;
-            existingSerie.Status = serie.Status;
-            existingSerie.FirstAirDate = serie.FirstAirDate;
-
-            return NoContent();
+            
 
         }
 
-        [HttpDelete]
-        [Route("{id}")]
-
+        [HttpDelete("{id}")]
         public IActionResult DeleteSerie(int id)
         {
-            var serieToDelete = series.FirstOrDefault( s => s.Id == id);
+            try
+            {
+                service.DeleteSeries(id);
 
-            if(serieToDelete == null)
+                return NoContent();
+            }
+            catch (Exception)
             {
                 return NotFound();
             }
-            series.Remove(serieToDelete);
-
-            return NoContent();
         }
     }    
 }
