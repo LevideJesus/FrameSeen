@@ -17,7 +17,7 @@ namespace FrameSeen.Controllers
             service = serieService;
         }
 
-        [HttpGet]
+        [HttpGet()]
         public IActionResult GetSeries()
         {
 
@@ -31,6 +31,19 @@ namespace FrameSeen.Controllers
             var response = service.GetSeriesById(id);
 
             if(response == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(response);
+        }
+
+        [HttpGet("tvmaze/{tvMazeId:int}")]
+        public async Task<IActionResult> GetSeriesFromTvMaze(int tvMazeId)
+        {
+            var response = await service.GetSeriesFromTvMazeAsync(tvMazeId);
+
+            if (response == null)
             {
                 return NotFound();
             }

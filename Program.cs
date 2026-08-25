@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using FrameSeen.Data;
@@ -24,6 +23,7 @@ namespace FrameSeen
 
             builder.Services.AddScoped<ISerieService, SeriesService>();
 
+
             var app = builder.Build();
  
             // Configure the HTTP request pipeline.
@@ -42,5 +42,7 @@ namespace FrameSeen
 
             app.Run();
         }
+
+       
     }
 }

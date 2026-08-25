@@ -7,9 +7,25 @@ namespace FrameSeen.Services
     public class SeriesService : ISerieService
     { 
         private readonly AppDbContext context;
-        public SeriesService(AppDbContext appDbContext)
+        private readonly IHttpClientFactory httpClientFactory;
+        public SeriesService(AppDbContext appDbContext, IHttpClientFactory httpClientFactory)
         {
             context = appDbContext;
+            this.httpClientFactory = httpClientFactory;
+        }
+
+        public async Task<string?> GetSeriesFromTvMazeAsync(int tvMazeId)
+        {
+            var client = httpClientFactory.CreateClient();
+
+            var response =await client.GetAsync($"https://api.tvmaze.com/shows/{tvMazeId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return await response.Content.ReadAsStringAsync();
+            }
+
+            return null;
         }
         public SerieResponse AddSeries(SerieRequest seriesRequest)
         {
@@ -113,5 +129,7 @@ namespace FrameSeen.Services
 
             
         }
+
+        
     }
 }
