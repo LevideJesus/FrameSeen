@@ -16,4 +16,10 @@ namespace FrameSeen.Dtos
         public string? Medium { get; set; }
         public string? Original { get; set; }
     }
+
+    public class TvMazeSearchResultDto 
+    {   
+    public double Score { get; set; }
+    public TvMazeShowDto Show { get; set; } = default!;
+    }
 }

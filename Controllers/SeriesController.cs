@@ -51,6 +51,24 @@ namespace FrameSeen.Controllers
             return Ok(response);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchSeries([FromQuery] string q)
+        {
+            if (string.IsNullOrWhiteSpace(q))
+            {
+                return BadRequest("Search query cannot be empty.");
+            }
+
+            var results = await service.SearchSeriesAsync(q);
+
+            if (results == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(results);
+        }
+
         [HttpPost]
 
         public IActionResult CreateSerie(SerieRequest serie)

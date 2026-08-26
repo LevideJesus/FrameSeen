@@ -2,6 +2,7 @@ using FrameSeen.Data;
 using FrameSeen.Dtos;
 using FrameSeen.Models;
 using System.Net.Http.Json;
+using System.Text.Json;
 
 namespace FrameSeen.Services
 {
@@ -26,6 +27,29 @@ namespace FrameSeen.Services
             {
                 var show = await response.Content.ReadFromJsonAsync<TvMazeShowDto>();
                 return show;
+            }
+
+            return null;
+        }
+
+        public async Task<List<TvMazeShowDto>?> SearchSeriesAsync(string query)
+        {
+            var search = httpClientFactory.CreateClient();
+            search.BaseAddress = new Uri($"https://api.tvmaze.com/");
+
+            var response = await search.GetAsync($"search/shows?q={Uri.EscapeDataString(query)}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonOptions = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                var searchResults = await response.Content.ReadFromJsonAsync<List<TvMazeSearchResultDto>>();
+                return searchResults?.Select(r => r.Show).ToList();
+
+                
             }
 
             return null;
