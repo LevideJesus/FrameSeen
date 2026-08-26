@@ -63,7 +63,7 @@ namespace FrameSeen.Controllers
         [HttpPut("{id}")]
         
 
-        public IActionResult UpdateProduct(int id, Series serie)
+        public IActionResult UpdateSerie(int id, Series serie)
         {
             try
             {

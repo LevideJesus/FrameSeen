@@ -17,8 +17,9 @@ namespace FrameSeen.Services
         public async Task<string?> GetSeriesFromTvMazeAsync(int tvMazeId)
         {
             var client = httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://api.tvmaze.com/");
 
-            var response =await client.GetAsync($"https://api.tvmaze.com/shows/{tvMazeId}");
+            var response =await client.GetAsync($"shows/{tvMazeId}");
 
             if (response.IsSuccessStatusCode)
             {
