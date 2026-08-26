@@ -23,6 +23,7 @@ namespace FrameSeen
 
             builder.Services.AddScoped<ISerieService, SeriesService>();
 
+            builder.Services.AddHttpClient();
 
             var app = builder.Build();
  
