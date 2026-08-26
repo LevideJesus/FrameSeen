@@ -13,13 +13,7 @@ Content-Type: application/json
 {
   
   "name": "Stranger Things",
-  "overview": "A group of young boys getting in trouble and having to fight against monsters",
-  "posterPath": null,
-  "numberOfSeasons": 5,
-  "numberOfEpisodes": 300,
-  "episodeRunTime": null,
-  "status": "Ended",
-  "firstAirDate": null
+
 }
 
 ### UPDATE A SERIE
@@ -28,15 +22,7 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    
   "name": "Game of Throwns",
-  "overview": "Kingdows that fight to have the thrown",
-  "posterPath": null,
-  "numberOfSeasons": 7,
-  "numberOfEpisodes": 600,
-  "episodeRunTime": null,
-  "status": "Ended",
-  "firstAirDate": null
 }
 ### ADD
 POST {{FrameSeen_HostAddress}}/api/series/
@@ -44,16 +30,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    
   
   "name": "Dexter",
-  "overview": "A man that is a killer but work for the police",
-  "posterPath": null,
-  "numberOfSeasons": 5,
-  "numberOfEpisodes": 500,
-  "episodeRunTime": null,
-  "status": "Ended",
-  "firstAirDate": null
+
 }
 
 ### DELETE A SERIE
