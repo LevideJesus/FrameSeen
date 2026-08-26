@@ -1,6 +1,7 @@
 using FrameSeen.Data;
 using FrameSeen.Dtos;
 using FrameSeen.Models;
+using System.Net.Http.Json;
 
 namespace FrameSeen.Services
 {
@@ -14,16 +15,17 @@ namespace FrameSeen.Services
             this.httpClientFactory = httpClientFactory;
         }
 
-        public async Task<string?> GetSeriesFromTvMazeAsync(int tvMazeId)
+        public async Task<TvMazeShowDto?> GetSeriesFromTvMazeAsync(int tvMazeId)
         {
             var client = httpClientFactory.CreateClient();
             client.BaseAddress = new Uri("https://api.tvmaze.com/");
 
-            var response =await client.GetAsync($"shows/{tvMazeId}");
+            var response = await client.GetAsync($"shows/{tvMazeId}");
 
             if (response.IsSuccessStatusCode)
             {
-                return await response.Content.ReadAsStringAsync();
+                var show = await response.Content.ReadFromJsonAsync<TvMazeShowDto>();
+                return show;
             }
 
             return null;
