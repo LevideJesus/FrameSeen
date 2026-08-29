@@ -7,7 +7,7 @@ namespace FrameSeen.Data
     {
         public DbSet<Series> Series => Set<Series>();
 
-        public DbSet<Users> Users => Set<Users>();
+        public DbSet<User> Users => Set<User>();
     }
 
     

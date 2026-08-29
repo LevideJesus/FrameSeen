@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using FrameSeen.Data;
 using FrameSeen.Services;
+using FrameSeen.Models;
 
 namespace FrameSeen
 {
@@ -22,6 +23,8 @@ namespace FrameSeen
             );
 
             builder.Services.AddScoped<ISerieService, SeriesService>();
+            
+            builder.Services.AddScoped<IUserService, UserService>();
 
             builder.Services.AddHttpClient();
 
