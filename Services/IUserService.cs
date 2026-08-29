@@ -6,9 +6,9 @@ namespace FrameSeen.Services
 {
     public interface IUserService
     {
-        IEnumerable<User> GetAllUsers();
-        User? GetUsersById(int id);
-        UserResponse AddUsers(UserRequest request);
+        IEnumerable<UserResponse> GetAllUsers();
+        UserResponse? GetUsersById(int id);
+        UserResponse AddUsers(UserRequest userRequest);
         void UpdateUsers(int id, User users);
         void DeleteUsers(int id);
     }

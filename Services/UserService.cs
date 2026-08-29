@@ -8,38 +8,91 @@ namespace FrameSeen.Services
     public class UserService : IUserService
     {
         private readonly AppDbContext context;
-        private readonly IHttpClientFactory httpClientFactory;
 
-        public UserService(AppDbContext appDbContext, IHttpClientFactory httpClientFactory)
+        public UserService(AppDbContext appDbContext)
         {
             context = appDbContext;
-            this.httpClientFactory = httpClientFactory;
+            
         }
-        public UserResponse AddUsers(UserRequest request)
+        public UserResponse AddUsers(UserRequest userRequest)
         {
-            throw new NotImplementedException();
+            var users = new User
+            {
+                Id = 0,
+                Name = userRequest.Name,
+                Email = userRequest.Email,
+                Password = userRequest.Password,
+                CreatedAt = userRequest.CreatedAt
+                
+                
+            };
+            
+            var newUser = context.Users.Add(users);
+            context.SaveChanges();
+            
+            var response = new UserResponse
+            {
+                Id = newUser.Entity.Id,
+                Name = newUser.Entity.Name,
+                Email = newUser.Entity.Email,
+                CreatedAt = newUser.Entity.CreatedAt
+                
+            };
+
+            return response;
         }
 
         public void DeleteUsers(int id)
         {
-            throw new NotImplementedException();
+            var user = context.Users.Find(id);
+            if(user != null)
+            {
+                context.Users.Remove(user);
+                context.SaveChanges();
+            }
         }
 
-        public IEnumerable<User> GetAllUsers()
+        public IEnumerable<UserResponse> GetAllUsers()
         {
-            throw new NotImplementedException();
+            var users = context.Users.ToList();
+
+            var response = users.Select(s => new UserResponse{
+                Id = s.Id,
+                Name = s.Name,
+                Email = s.Email,
+                CreatedAt = s.CreatedAt
+                
+            });
+            return response;
         }
 
-        public User? GetUsersById(int id)
+        public UserResponse? GetUsersById(int id)
         {
-            throw new NotImplementedException();
+            var user = context.Users.Find(id);
+
+            var response = user == null ? null : new UserResponse
+            {
+                Id = user.Id,
+                Name = user.Name,
+                Email = user.Email,
+                CreatedAt = user.CreatedAt
+                
+            };
+            return response;
         }
 
         public void UpdateUsers(int id, User users)
         {
-            throw new NotImplementedException();
-        }
+            var existingUser = context.Users.Find(id);
 
-        
+            if(existingUser != null)
+            {
+                existingUser.Name = users.Name;
+                existingUser.Email = users.Email;
+                existingUser.Password = users.Password;
+                existingUser.CreatedAt = users.CreatedAt;
+                context.SaveChanges();
+            }
+        }
     }
 }
