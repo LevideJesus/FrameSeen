@@ -68,7 +68,20 @@ namespace FrameSeen.Controllers
 
             return Ok(results);
         }
+        
+        [HttpPost("import/{tvMazeId:int}")]
 
+        public async Task<IActionResult> ImportSeries(int tvMazeId)
+        {
+            var importedSerie = await service.ImportFromTvMazeAsync(tvMazeId);
+
+            if(importedSerie == null)
+            {
+                return NotFound();
+            }
+
+            return CreatedAtAction(nameof(GetSeriesById), new {id = importedSerie.Id}, importedSerie);
+        }
         [HttpPost]
 
         public IActionResult CreateSerie(SerieRequest serie)

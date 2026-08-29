@@ -54,6 +54,47 @@ namespace FrameSeen.Services
 
             return null;
         }
+
+        public async Task<SerieResponse?> ImportFromTvMazeAsync(int tvMazeId)
+        {
+            var response = await GetSeriesFromTvMazeAsync(tvMazeId);
+
+            if(response == null)
+            {
+                return null;
+            }
+
+            var newSeries = new Series
+            {
+                
+                Name = response.Name,
+                Overview = response.Summary,
+                Status = response.Status,
+                EpisodeRunTime = response.Runtime,
+                PosterPath = response.Image?.Medium,
+                    
+                FirstAirDate = DateTime.TryParse(response.Premiered, out var parsedDate) ? parsedDate : null,
+                NumberOfSeasons = 0,
+                NumberOfEpisodes = 0
+            };
+
+            context.Series.Add(newSeries);
+            await context.SaveChangesAsync();
+
+            return new SerieResponse
+            {
+                Id = newSeries.Id,
+                Name = newSeries.Name,
+                Overview = newSeries.Overview,
+                Status = newSeries.Status,
+                FirstAirDate = newSeries.FirstAirDate,
+                EpisodeRunTime = newSeries.EpisodeRunTime,
+                PosterPath = newSeries.PosterPath
+            };
+
+        
+
+        }
         public SerieResponse AddSeries(SerieRequest seriesRequest)
         {
             var series = new Series

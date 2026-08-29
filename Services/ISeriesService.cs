@@ -5,6 +5,8 @@ namespace FrameSeen.Services
     public interface ISerieService
     {
         Task<TvMazeShowDto?> GetSeriesFromTvMazeAsync(int tvMazeId);
+
+        Task<SerieResponse?> ImportFromTvMazeAsync(int tvMazeId);
         IEnumerable<SerieResponse> GetAllSeries();
 
         SerieResponse? GetSeriesById(int id);
