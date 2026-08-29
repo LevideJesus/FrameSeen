@@ -2,7 +2,7 @@ namespace FrameSeen.Dtos
 {
     public class SerieRequest
     {
-        public string Name {get; set;}
+        public string? Name {get; set;}
 
         public string? Overview {get; set;}
 
