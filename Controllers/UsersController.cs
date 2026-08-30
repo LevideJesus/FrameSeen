@@ -1,10 +1,12 @@
 using FrameSeen.Dtos;
 using FrameSeen.Models;
 using FrameSeen.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrameSeen.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -18,12 +20,34 @@ namespace FrameSeen.Controllers
             this.tokenProvider = tokenProvider;
         }
 
+        [AllowAnonymous]
         [HttpPost("login")]
         public IActionResult Login([FromBody] User user)
         {
             string token = tokenProvider.CreateToken(user);
 
             return Ok(new {Token = token});
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public IActionResult Register([FromBody] UserRequest request)
+        {
+            UserResponse response = service.AddUsers(request);
+
+            return Ok(response);
+            
+        }
+
+        [Authorize]
+        [HttpGet("id")]
+
+        public IActionResult GetById(int id)
+        {
+            var user = service.GetUsersById(id);
+            if (user == null) return NotFound();
+
+            return Ok(user);
         }
 
 
@@ -74,7 +98,7 @@ namespace FrameSeen.Controllers
             
 
         }
-
+        [Authorize(Policy = "AdminOnly")]
         [HttpDelete("{id}")]
         public IActionResult DeleteUser(int id)
         {
