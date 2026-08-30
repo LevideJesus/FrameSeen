@@ -39,3 +39,31 @@ Content-Type: application/json
 DELETE {{FrameSeen_HostAddress}}/api/series/2
 Accept: application/json
 
+
+
+### GET ALL USERS
+GET {{FrameSeen_HostAddress}}/api/users
+Accept: application/json
+
+### Create user
+POST {{FrameSeen_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+  "name": "Levi",
+  "email": "levi@email.com",
+  "password": "123456"
+}
+
+### Update user
+PUT {{FrameSeen_HostAddress}}/api/users/1
+Content-Type: application/json
+
+{
+  "name": "Levi Updated",
+  "email": "levi@email.com",
+  "password": "123456"
+}
+
+### Delete user
+DELETE {{FrameSeen_HostAddress}}/api/users/1
