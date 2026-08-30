@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrameSeen.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UsersController : ControllerBase
     {
         private readonly IUserService service;
@@ -36,7 +38,7 @@ namespace FrameSeen.Controllers
 
         [HttpPost]
 
-        public IActionResult CreateSerie(UserRequest user)
+        public IActionResult CreateUser(UserRequest user)
         {
             var createdUser = service.AddUsers(user);
             return CreatedAtAction(nameof(GetUsersById), new {id = createdUser.Id}, createdUser);
@@ -45,7 +47,7 @@ namespace FrameSeen.Controllers
         [HttpPut("{id}")]
         
 
-        public IActionResult UpdateSerie(int id, User serie)
+        public IActionResult UpdateUser(int id, User serie)
         {
             try
             {
