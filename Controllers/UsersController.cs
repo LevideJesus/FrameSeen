@@ -10,11 +10,23 @@ namespace FrameSeen.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService service;
+        private readonly TokenProvider tokenProvider;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, TokenProvider tokenProvider)
         {
             service = userService;
+            this.tokenProvider = tokenProvider;
         }
+
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] User user)
+        {
+            string token = tokenProvider.CreateToken(user);
+
+            return Ok(new {Token = token});
+        }
+
+
         [HttpGet()]
         public IActionResult GetUsers()
         {

@@ -26,6 +26,8 @@ namespace FrameSeen
             
             builder.Services.AddScoped<IUserService, UserService>();
 
+            builder.Services.AddSingleton<TokenProvider>();
+
             builder.Services.AddHttpClient();
 
             var app = builder.Build();
