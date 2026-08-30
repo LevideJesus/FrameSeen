@@ -60,5 +60,20 @@ namespace FrameSeen.Controllers
             
 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteUser(int id)
+        {
+            try
+            {
+                service.DeleteUsers(id);
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }
