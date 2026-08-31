@@ -46,12 +46,12 @@ GET {{FrameSeen_HostAddress}}/api/users
 Accept: application/json
 
 ### Create user
-POST {{FrameSeen_HostAddress}}/api/users
+POST {{FrameSeen_HostAddress}}/api/register
 Content-Type: application/json
 
 {
   "name": "Levi",
-  "email": "levi@email.com",
+  "email": "levi@test.com",
   "password": "123456"
 }
 
