@@ -9,6 +9,7 @@ namespace FrameSeen.Services
         IEnumerable<UserResponse> GetAllUsers();
         UserResponse? GetUsersById(int id);
         UserResponse AddUsers(UserRequest userRequest);
+        User? ValidateUser(string email, string password);
         void UpdateUsers(int id, User users);
         void DeleteUsers(int id);
     }

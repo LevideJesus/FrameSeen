@@ -14,6 +14,17 @@ namespace FrameSeen.Services
             context = appDbContext;
             
         }
+
+        public User? ValidateUser(string email, string password)
+        {
+            var user = context.Users.FirstOrDefault(u => u.Email == email);
+
+            if(user == null) return null;
+
+            if(user.Password != password) return null;
+
+            return user;
+        }
         public UserResponse AddUsers(UserRequest userRequest)
         {
             var users = new User

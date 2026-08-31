@@ -22,11 +22,17 @@ namespace FrameSeen.Controllers
 
         [AllowAnonymous]
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User user)
+        public IActionResult Login([FromBody] LoginRequest request)
         {
-            string token = tokenProvider.CreateToken(user);
+            var user = service.ValidateUser(request.Email, request.Password);
+    
+            if (user == null)
+            {
+                return Unauthorized("Invalid email or password.");
+            }
 
-            return Ok(new {Token = token});
+            string token = tokenProvider.CreateToken(user);
+            return Ok(new { Token = token });
         }
 
         [AllowAnonymous]
@@ -40,18 +46,8 @@ namespace FrameSeen.Controllers
         }
 
         [Authorize]
-        [HttpGet("id")]
 
-        public IActionResult GetById(int id)
-        {
-            var user = service.GetUsersById(id);
-            if (user == null) return NotFound();
-
-            return Ok(user);
-        }
-
-
-        [HttpGet()]
+        [HttpGet]
         public IActionResult GetUsers()
         {
 
@@ -72,18 +68,8 @@ namespace FrameSeen.Controllers
             return Ok(response);
         }
 
-        [HttpPost]
-
-        public IActionResult CreateUser(UserRequest user)
-        {
-            var createdUser = service.AddUsers(user);
-            return CreatedAtAction(nameof(GetUsersById), new {id = createdUser.Id}, createdUser);
-        }
-
         [HttpPut("{id}")]
-        
-
-        public IActionResult UpdateUser(int id, User serie)
+        public IActionResult UpdateUser(int id, [FromBody]User serie)
         {
             try
             {
