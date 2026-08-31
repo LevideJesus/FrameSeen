@@ -1,6 +1,11 @@
+using System.Security.Cryptography;
+using System.Text;
+using BC = BCrypt.Net.BCrypt;
 using FrameSeen.Data;
 using FrameSeen.Dtos;
 using FrameSeen.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Identity.Data;
 
 
 namespace FrameSeen.Services
@@ -8,6 +13,7 @@ namespace FrameSeen.Services
     public class UserService : IUserService
     {
         private readonly AppDbContext context;
+
 
         public UserService(AppDbContext appDbContext)
         {
@@ -17,22 +23,31 @@ namespace FrameSeen.Services
 
         public User? ValidateUser(string email, string password)
         {
+            
             var user = context.Users.FirstOrDefault(u => u.Email == email);
 
             if(user == null) return null;
 
-            if(user.Password != password) return null;
-
-            return user;
+            if(!BCrypt.Net.BCrypt.Verify(password, user.Password))
+            {
+                return null;
+            }
+            else
+            {
+                return user;
+            }
+            
         }
         public UserResponse AddUsers(UserRequest userRequest)
         {
+            string passwordHash = BCrypt.Net.BCrypt.HashPassword(userRequest.Password);
+            
             var users = new User
             {
                 Id = 0,
                 Name = userRequest.Name,
                 Email = userRequest.Email,
-                Password = userRequest.Password,
+                Password = passwordHash,
                 CreatedAt = userRequest.CreatedAt
                 
                 
