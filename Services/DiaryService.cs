@@ -30,5 +30,25 @@ namespace FrameSeen.Services
 
             return response;
         }
+
+        public DiaryResponse? GetDiaryById(int id)
+        {
+            var diary = context.Diaries.Find(id);
+
+            var response = diary == null ? null : new DiaryResponse
+            {
+                Id = diary.Id,
+                UserId = diary.UserId,
+                SeriesId = diary.SeriesId,
+                Rating = diary.Rating,
+                WatchedAt = diary.WatchedAt,
+                Review = diary.Review,
+                CreatedAt = diary.CreatedAt
+            };
+
+            return response;
+
+            
+        }
     }
 }
