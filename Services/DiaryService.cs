@@ -91,5 +91,22 @@ namespace FrameSeen.Services
                 context.SaveChanges();
             }
         }
+
+        public void UpdateDiary(int id, Diary diaries)
+        {
+            var existingDiary = context.Diaries.Find(id);
+
+            if(existingDiary != null)
+            {
+                existingDiary.UserId = diaries.UserId;
+                existingDiary.SeriesId = diaries.SeriesId;
+                existingDiary.Rating = diaries.Rating;
+                existingDiary.WatchedAt = diaries.WatchedAt;
+                existingDiary.Review = diaries.Review;
+                existingDiary.CreatedAt = diaries.CreatedAt;
+                context.SaveChanges();
+
+            }
+        }
     }
 }
