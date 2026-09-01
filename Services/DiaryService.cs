@@ -47,8 +47,38 @@ namespace FrameSeen.Services
             };
 
             return response;
-
             
+        }
+
+        public DiaryResponse AddDiary(DiaryRequest diaryRequest)
+        {
+            var diaries = new Diary
+            {
+                Id = 0,
+                UserId = diaryRequest.UserId,
+                SeriesId = diaryRequest.SeriesId,
+                Rating = diaryRequest.Rating,
+                WatchedAt = diaryRequest.WatchedAt,
+                Review = diaryRequest.Review,
+                CreatedAt = DateTimeOffset.UtcNow
+                
+            };
+
+            var newDiary = context.Diaries.Add(diaries);
+            context.SaveChanges();
+
+            var response = new DiaryResponse
+            {
+                Id = newDiary.Entity.Id,
+                UserId = newDiary.Entity.UserId,
+                SeriesId = newDiary.Entity.SeriesId,
+                Rating = newDiary.Entity.Rating,
+                WatchedAt = newDiary.Entity.WatchedAt,
+                Review = newDiary.Entity.Review,
+                CreatedAt = newDiary.Entity.CreatedAt
+            };
+
+            return response;
         }
     }
 }
