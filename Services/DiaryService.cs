@@ -80,5 +80,16 @@ namespace FrameSeen.Services
 
             return response;
         }
+
+        public void DeleteDiary(int id)
+        {
+            var diary = context.Diaries.Find(id);
+
+            if(diary != null)
+            {
+                context.Diaries.Remove(diary);
+                context.SaveChanges();
+            }
+        }
     }
 }
