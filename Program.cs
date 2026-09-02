@@ -44,6 +44,7 @@ namespace FrameSeen
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
             });    
 
+            builder.Services.AddScoped<IDiaryService, DiaryService>();
             builder.Services.AddScoped<ISerieService, SeriesService>();
             
             builder.Services.AddScoped<IUserService, UserService>();
