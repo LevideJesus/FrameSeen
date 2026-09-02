@@ -40,5 +40,47 @@ namespace FrameSeen.Controllers
 
             return Ok(response);
         }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult AddDiary(DiaryRequest request)
+        {
+            DiaryResponse response = service.AddDiary(request);
+
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        [Authorize]
+
+        public IActionResult UpdateDiary(int id, Diary diary)
+        {
+            try
+            {
+                service.UpdateDiary(id, diary);
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteDiary(int id)
+        {
+            try
+            {
+                service.DeleteDiary(id);
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }
