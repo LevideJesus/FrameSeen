@@ -8,7 +8,7 @@ namespace FrameSeen.Services
 
         ListResponse? GetListById(int id);
 
-        ListResponse AddList(ListRequest request);
+        ListResponse AddList(ListRequest listRequest);
         ListResponse? UpdateList(int id, ListRequest request);
         void DeleteList(int id);
     }

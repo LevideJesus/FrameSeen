@@ -10,6 +10,8 @@ namespace FrameSeen.Data
         public DbSet<User> Users => Set<User>();
 
         public DbSet<Diary> Diaries => Set<Diary>();
+
+        public DbSet<List> Lists => Set<List>();
     }
 
     
