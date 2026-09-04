@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using FrameSeen.Dtos;
 using FrameSeen.Models;
 using FrameSeen.Services;
@@ -24,27 +25,70 @@ namespace FrameSeen.Controllers
         [HttpGet]
         public IActionResult GetAllDiaries()
         {
-            return Ok(service.GetAllDiaries());
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
+
+            if(!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var diaries = service.GetAllDiaries(userId);
+            return Ok(diaries);
         }
 
         [HttpGet("{id}")]
+        [Authorize]
 
         public IActionResult GetDiaryById(int id)
         {
-            var response = service.GetDiaryById(id);
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
 
-            if(response == null)
+            if (!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var entry = service.GetDiaryById(id);
+            if (entry == null)
             {
                 return NotFound();
             }
 
-            return Ok(response);
+            if (entry.UserId != userId)
+            {
+                return NotFound();
+            }
+
+          
+            return Ok(entry);
         }
 
         [Authorize]
         [HttpPost]
         public IActionResult AddDiary(DiaryRequest request)
         {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
+
+            if(!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+            request.UserId = userId;
+
             DiaryResponse response = service.AddDiary(request);
 
             return Ok(response);
@@ -53,17 +97,32 @@ namespace FrameSeen.Controllers
         [HttpPut("{id}")]
         [Authorize]
 
-        public IActionResult UpdateDiary(int id, Diary diary)
+        public IActionResult UpdateDiary(int id, DiaryRequest request)
         {
-            try
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(nameIdentifier))
             {
-                service.UpdateDiary(id, diary);
-                return NoContent();
+                return Unauthorized();
             }
-            catch (Exception)
+
+            if (!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var entry = service.GetDiaryById(id);
+            if (entry == null)
             {
                 return NotFound();
             }
+
+            if (entry.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            var response = service.UpdateDiary(id, request);
+            return Ok(response);
         }
 
         [Authorize]
@@ -71,16 +130,30 @@ namespace FrameSeen.Controllers
 
         public IActionResult DeleteDiary(int id)
         {
-            try
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (string.IsNullOrEmpty(nameIdentifier))
             {
-                service.DeleteDiary(id);
-
-                return NoContent();
+                return Unauthorized();
             }
-            catch (Exception)
+
+            if (!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var entry = service.GetDiaryById(id);
+            if (entry == null)
             {
                 return NotFound();
             }
+
+            if (entry.UserId != userId)
+            {
+                return NotFound();
+            }
+
+            service.DeleteDiary(id);
+            return NoContent();
         }
     }
 }

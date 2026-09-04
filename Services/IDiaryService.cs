@@ -5,12 +5,12 @@ namespace FrameSeen.Services
 {
     public interface IDiaryService
     {
-        IEnumerable<DiaryResponse> GetAllDiaries();
+        IEnumerable<DiaryResponse> GetAllDiaries(int userId);
 
         DiaryResponse? GetDiaryById(int id);
 
         DiaryResponse AddDiary(DiaryRequest request);
-        void UpdateDiary(int id, Diary diary);
+        DiaryResponse? UpdateDiary(int id, DiaryRequest request);
         void DeleteDiary(int id);
     }
 }

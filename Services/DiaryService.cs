@@ -13,9 +13,10 @@ namespace FrameSeen.Services
             context = appDbContext;
         }
 
-        public IEnumerable<DiaryResponse> GetAllDiaries()
+        public IEnumerable<DiaryResponse> GetAllDiaries(int userId)
         {
-            var diaries = context.Diaries.ToList();
+            var diaries = context.Diaries.
+                Where(d => d.UserId == userId).ToList();
 
             var response = diaries.Select(d => new DiaryResponse
             {
@@ -92,21 +93,31 @@ namespace FrameSeen.Services
             }
         }
 
-        public void UpdateDiary(int id, Diary diaries)
+        public DiaryResponse? UpdateDiary(int id, DiaryRequest request)
         {
             var existingDiary = context.Diaries.Find(id);
 
-            if(existingDiary != null)
+            if(existingDiary == null)
             {
-                existingDiary.UserId = diaries.UserId;
-                existingDiary.SeriesId = diaries.SeriesId;
-                existingDiary.Rating = diaries.Rating;
-                existingDiary.WatchedAt = diaries.WatchedAt;
-                existingDiary.Review = diaries.Review;
-                existingDiary.CreatedAt = diaries.CreatedAt;
-                context.SaveChanges();
+                return null;
 
             }
+                existingDiary.SeriesId = request.SeriesId;
+                existingDiary.Rating = request.Rating;
+                existingDiary.WatchedAt = request.WatchedAt;
+                existingDiary.Review = request.Review;
+                context.SaveChanges();
+
+            return new DiaryResponse
+            {
+                Id = existingDiary.Id,
+                UserId = existingDiary.UserId,
+                SeriesId = existingDiary.SeriesId,
+                Rating = existingDiary.Rating,
+                WatchedAt = existingDiary.WatchedAt,
+                Review = existingDiary.Review,
+                CreatedAt = existingDiary.CreatedAt
+            };    
         }
     }
 }
