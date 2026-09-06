@@ -2,9 +2,8 @@ using System.Security.Claims;
 using FrameSeen.Dtos;
 using FrameSeen.Services;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
+
 
 
 namespace FrameSeen.Controllers
@@ -100,7 +99,7 @@ namespace FrameSeen.Controllers
             return Ok(response);
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         [Authorize]
 
         public IActionResult UpdateList(int id, ListRequest request)
@@ -124,7 +123,7 @@ namespace FrameSeen.Controllers
                 return NotFound();
             }
 
-            if(entry != null)
+            if(entry.UserId != userId)
             {
                 return NotFound();
             }
@@ -148,7 +147,7 @@ namespace FrameSeen.Controllers
 
             if(!int.TryParse(nameIdentifier, out int userId))
             {
-                return NotFound();
+                return BadRequest();
             }
 
             var entry = service.GetListById(id);
@@ -158,7 +157,7 @@ namespace FrameSeen.Controllers
                 return NotFound();
             }
 
-            if(entry != null)
+            if(entry.UserId != userId)
             {
                 return NotFound();
             }
