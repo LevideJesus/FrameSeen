@@ -1,7 +1,7 @@
 using FrameSeen.Data;
 using FrameSeen.Dtos;
 using FrameSeen.Models;
-using Microsoft.Extensions.Configuration.UserSecrets;
+
 
 namespace FrameSeen.Services
 {
@@ -92,11 +92,11 @@ namespace FrameSeen.Services
             }
 
             existingList.Name = request.Name;
-            existingList.UserId = request.UserId;
             context.SaveChanges();
 
             return new ListResponse
             {
+                Id = existingList.Id,
                 Name = existingList.Name,
                 UserId = existingList.UserId,
                 CreatedAt = existingList.CreatedAt
