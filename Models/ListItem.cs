@@ -1,6 +1,6 @@
 namespace FrameSeen.Models
 {
-    public class FavoriteSerie
+    public class ListItem
     {
         public int Id {get; set;}
 

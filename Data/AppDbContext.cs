@@ -13,7 +13,7 @@ namespace FrameSeen.Data
 
         public DbSet<List> Lists => Set<List>();
 
-        public DbSet<FavoriteSerie> FavoriteSeries => Set<FavoriteSerie>();
+        public DbSet<ListItem> ListItem => Set<ListItem>();
     }
 
     
