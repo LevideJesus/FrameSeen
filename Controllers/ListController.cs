@@ -41,5 +41,38 @@ namespace FrameSeen.Controllers
 
             return Ok(lists);
         }
+
+        [HttpGet("{id}")]
+        [Authorize]
+
+        public IActionResult GetListById(int id)
+        {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
+
+            if(!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var entry = service.GetListById(id);
+
+            if(entry == null)
+            {
+                return NotFound();
+            }
+
+            if(entry.UserId != userId)
+            {
+                return NotFound();
+            }
+
+
+            return Ok(entry);
+        }
     }
 }
