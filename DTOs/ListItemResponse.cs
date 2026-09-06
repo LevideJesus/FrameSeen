@@ -6,7 +6,7 @@ namespace FrameSeen.Dtos
 
         public int ListId {get; set;}
 
-        public int SerieId {get; set;}
+        public int SeriesId {get; set;}
         
     }
 }

@@ -3,9 +3,9 @@ namespace FrameSeen.Services
 {
     public interface IListItemService
     {
-        IEnumerable<ListItemResponse> GetAllTheListItems(int listId);
-        ListItemResponse AddItem(int listId, int seriesId);
+        IEnumerable<ListItemResponse> GetAllTheListItems(int listId, int userId);
+        ListItemResponse AddItem(int listId, int seriesId, int userId);
 
-        void DeleteList(int listId, int seriesId);
+        void RemoveItem( int listId, int seriesId, int userId);
     }
 }
