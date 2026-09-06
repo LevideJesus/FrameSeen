@@ -133,5 +133,38 @@ namespace FrameSeen.Controllers
             
             return Ok(response);
         }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+
+        public IActionResult DeleteList(int id)
+        {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
+
+            if(!int.TryParse(nameIdentifier, out int userId))
+            {
+                return NotFound();
+            }
+
+            var entry = service.GetListById(id);
+
+            if(entry == null)
+            {
+                return NotFound();
+            }
+
+            if(entry != null)
+            {
+                return NotFound();
+            }
+
+            service.DeleteList(id);
+            return NoContent();
+        }
     }
 }
