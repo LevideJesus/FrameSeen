@@ -12,6 +12,8 @@ namespace FrameSeen.Data
         public DbSet<Diary> Diaries => Set<Diary>();
 
         public DbSet<List> Lists => Set<List>();
+
+        public DbSet<FavoriteSerie> FavoriteSeries => Set<FavoriteSerie>();
     }
 
     
