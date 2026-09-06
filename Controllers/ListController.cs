@@ -99,5 +99,39 @@ namespace FrameSeen.Controllers
 
             return Ok(response);
         }
+
+        [HttpPut]
+        [Authorize]
+
+        public IActionResult UpdateList(int id, ListRequest request)
+        {
+            var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(nameIdentifier))
+            {
+                return Unauthorized();
+            }
+
+            if(!int.TryParse(nameIdentifier, out int userId))
+            {
+                return BadRequest();
+            }
+
+            var entry = service.GetListById(id);
+
+            if(entry == null)
+            {
+                return NotFound();
+            }
+
+            if(entry != null)
+            {
+                return NotFound();
+            }
+
+            var response = service.UpdateList(id, request);
+            
+            return Ok(response);
+        }
     }
 }
