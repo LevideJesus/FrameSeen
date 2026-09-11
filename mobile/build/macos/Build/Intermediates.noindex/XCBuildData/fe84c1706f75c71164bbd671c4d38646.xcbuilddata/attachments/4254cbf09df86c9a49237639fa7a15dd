@@ -1,0 +1,19 @@
+{
+  "" : {
+    "diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage-primary.dia",
+    "emit-module-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage-primary-emit-module.dia",
+    "pch" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage-primary.swiftdeps"
+  },
+  "/Users/levizao/Documents/frameseen_app/macos/Flutter/ephemeral/Packages/FlutterGeneratedPluginSwiftPackage/Sources/FlutterGeneratedPluginSwiftPackage/FlutterGeneratedPluginSwiftPackage.swift" : {
+    "const-values" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.swiftconstvalues",
+    "dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.d",
+    "diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.dia",
+    "index-unit-output-path" : "/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.o",
+    "llvm-bc" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.bc",
+    "object" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.o",
+    "swift-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage.swiftdeps",
+    "swiftmodule" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterGeneratedPluginSwiftPackage.build/Debug/FlutterGeneratedPluginSwiftPackage.build/Objects-normal/arm64/FlutterGeneratedPluginSwiftPackage~partial.swiftmodule"
+  }
+}

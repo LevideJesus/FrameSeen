@@ -1,0 +1,19 @@
+{
+  "" : {
+    "diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework-primary.dia",
+    "emit-module-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework-primary-emit-module.dia",
+    "pch" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework-primary.swiftdeps"
+  },
+  "/Users/levizao/Documents/frameseen_app/macos/Flutter/ephemeral/Packages/.packages/FlutterFramework/Sources/FlutterFramework/FlutterFramework.swift" : {
+    "const-values" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.swiftconstvalues",
+    "dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.d",
+    "diagnostics" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.dia",
+    "index-unit-output-path" : "/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.o",
+    "llvm-bc" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.bc",
+    "object" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.o",
+    "swift-dependencies" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework.swiftdeps",
+    "swiftmodule" : "/Users/levizao/Documents/frameseen_app/build/macos/Build/Intermediates.noindex/FlutterFramework.build/Debug/FlutterFramework.build/Objects-normal/arm64/FlutterFramework~partial.swiftmodule"
+  }
+}
